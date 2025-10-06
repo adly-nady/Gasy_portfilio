@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gasy Kamal | UI/UX Designer</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <!-- Typed.js for animated typing effect -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+  <style>
+    /* Custom Styles for macOS aesthetic */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0d0d0d;
+      color: #E0E0E0;
+      overflow-x: hidden;
+    }
+
+    /* Glassmorphism Effect */
+    .glass-effect {
+      background: rgba(28, 28, 28, 0.5);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Gradient Blob Animations */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.2;
+      z-index: -1;
+    }
+
+    .blob-1 {
+      width: 500px;
+      height: 500px;
+      background: #8A2BE2;
+      top: -150px;
+      left: -200px;
+      animation: moveBlob1 25s infinite alternate;
+    }
+
+    .blob-2 {
+      width: 450px;
+      height: 450px;
+      background: #4169E1;
+      bottom: -200px;
+      right: -150px;
+      animation: moveBlob2 30s infinite alternate;
+    }
+
+    @keyframes moveBlob1 {
+      from { transform: translate(-100px, -50px) scale(1) rotate(0deg); }
+      to { transform: translate(100px, 100px) scale(1.3) rotate(180deg); }
+    }
+
+    @keyframes moveBlob2 {
+      from { transform: translate(50px, 100px) scale(1.2) rotate(0deg); }
+      to { transform: translate(-100px, -50px) scale(1) rotate(-180deg); }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+    
+    /* Navigation Dock Animation */
+    .nav-dock a {
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s;
+    }
+    .nav-dock a:hover {
+        transform: translateY(-8px) scale(1.15);
+        background-color: #8A2BE2;
+    }
+    .nav-dock a.active {
+        transform: translateY(-8px) scale(1.15);
+        background-color: #8A2BE2;
+        box-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
+    }
+    
+    /* Section Title Underline */
+    .section-title h2::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: #8A2BE2;
+        margin: 10px auto 0;
+        border-radius: 5px;
+        transform: scaleX(0);
+        transition: transform 0.5s ease-in-out;
+    }
+    .section-title.in-view h2::after {
+        transform: scaleX(1);
+    }
+
+    /* Smooth scroll behavior */
+    html { scroll-behavior: smooth; }
+
+    /* Hero image float animation */
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0px); }
+    }
+    .floating-image {
+        animation: float 6s ease-in-out infinite;
+    }
+    
+    /* Skill bar animation */
+    .skill-bar-inner {
+        transition: width 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        width: 0%;
+    }
+    
+    /* Portfolio Item 3D Tilt Effect */
+    .portfolio-item {
+        transition: transform 0.4s ease;
+        transform-style: preserve-3d;
+    }
+    .portfolio-item:hover {
+        transform: perspective(1000px) rotateY(5deg) rotateX(5deg) scale(1.05);
+    }
+
+    /* Mobile Navigation */
+    .mobile-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(28, 28, 28, 0.9);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        z-index: 50;
+    }
+
+    @media (min-width: 768px) {
+        .mobile-nav {
+            display: none;
+        }
+    }
+
+    .resume-item {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 25px;
+    }
+
+    .resume-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 8px;
+        height: 8px;
+        background: #8A2BE2;
+        border-radius: 50%;
+    }
+
+    .testimonial-grid {
+        columns: 1;
+        gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .testimonial-grid {
+            columns: 2;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .testimonial-grid {
+            columns: 3;
+        }
+    }
+
+    .testimonial-card {
+        break-inside: avoid;
+        margin-bottom: 2rem;
+    }
+    
+    /* New enhancements */
+    .gradient-text {
+        background: linear-gradient(135deg, #8A2BE2, #4169E1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .floating-action-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #8A2BE2, #4169E1);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 20px rgba(138, 43, 226, 0.4);
+        z-index: 1000;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    
+    .floating-action-btn.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .floating-action-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(138, 43, 226, 0.6);
+    }
+    
+    .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: linear-gradient(to right, #8A2BE2, #4169E1);
+        z-index: 9999;
+        transition: width 0.2s ease;
+    }
+    
+    .cursor-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #8A2BE2;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s;
+    }
+    
+    .cursor-outline {
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgba(138, 43, 226, 0.5);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: all 0.2s ease-out;
+    }
+    
+    .cursor-dot.hidden, .cursor-outline.hidden {
+        opacity: 0;
+    }
+    
+    .cursor-outline.hover {
+        transform: translate(-50%, -50%) scale(1.5);
+        background-color: rgba(138, 43, 226, 0.1);
+    }
+    
+    .portfolio-item:hover ~ .cursor-outline {
+        transform: translate(-50%, -50%) scale(1.5);
+        background-color: rgba(138, 43, 226, 0.1);
+    }
+    
+    .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #0d0d0d;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    
+    .preloader-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(138, 43, 226, 0.3);
+        border-radius: 50%;
+        border-top-color: #8A2BE2;
+        animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    .particles-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+    }
+    
+    .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #8A2BE2, #4169E1);
+        opacity: 0.3;
+    }
+
+    /* New Enhancements for better mobile experience */
+    @media (max-width: 767px) {
+      /* Improve touch targets for mobile */
+      .nav-dock a, .mobile-nav a {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      /* Adjust hero section for mobile */
+      #hero h1 {
+        font-size: 3rem !important;
+      }
+      
+      #hero .floating-image {
+        width: 280px !important;
+        height: 280px !important;
+      }
+      
+      /* Improve button sizes for mobile */
+      .px-6.py-3 {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+      }
+      
+      /* Adjust section padding for mobile */
+      section {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+      }
+      
+      /* Improve text readability on mobile */
+      p, span, div {
+        line-height: 1.6;
+      }
+      
+      /* Better spacing for mobile navigation */
+      .mobile-nav {
+        padding: 0.5rem 0;
+      }
+      
+      /* Adjust portfolio items for mobile */
+      .portfolio-item {
+        margin-bottom: 1.5rem;
+      }
+      
+      /* Improve form inputs for mobile */
+      input, textarea {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+      }
+    }
+
+    /* Enhanced animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translate3d(0, 40px, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+    
+    .animate-fadeInUp {
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    /* Improved focus states for accessibility */
+    a:focus, button:focus, input:focus, textarea:focus {
+      outline: 2px solid #8A2BE2;
+      outline-offset: 2px;
+    }
+    
+    /* Dark mode improvements */
+    .dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(28, 28, 28, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+
+<body class="relative">
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="preloader-spinner"></div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar"></div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot hidden md:block"></div>
+  <div class="cursor-outline hidden md:block"></div>
+
+  <!-- Floating Action Button -->
+  <a href="#hero" class="floating-action-btn">
+    <i class="bi bi-arrow-up text-xl"></i>
+  </a>
+
+  <!-- Dark Mode Toggle -->
+  <div class="dark-mode-toggle">
+    <i class="bi bi-moon text-white"></i>
+  </div>
+
+  <!-- Particles Background -->
+  <div class="particles-container" id="particles"></div>
+
+  <!-- Animated Background Blobs -->
+  <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <!-- Desktop Navigation Dock -->
+  <header class="fixed top-1/2 -translate-y-1/2 left-4 z-50 hidden md:block">
+    <nav class="nav-dock flex flex-col items-center gap-4 p-3 rounded-full glass-effect">
+      <a href="#hero" class="active w-12 h-12 flex items-center justify-center rounded-full text-xl text-white" title="Home">
+        <i class="bi bi-house"></i>
+      </a>
+      <a href="#about" class="w-12 h-12 flex items-center justify-center rounded-full text-xl text-white" title="About">
+        <i class="bi bi-person"></i>
+      </a>
+      <a href="#resume" class="w-12 h-12 flex items-center justify-center rounded-full text-xl text-white" title="Resume">
+        <i class="bi bi-file-earmark-text"></i>
+      </a>
+      <a href="#skills" class="w-12 h-12 flex items-center justify-center rounded-full text-xl text-white" title="Skills">
+        <i class="bi bi-gear"></i>
+      </a>
+      <a href="#portfolio" class="w-12 h-12 flex items-center justify-center rounded-full text-xl text-white" title="Portfolio">
+        <i class="bi bi-images"></i>
+      </a>
+      <a href="#services" class="w-12 h-12 flex items-center justify-center rounded-full text-xl text-white" title="Services">
+        <i class="bi bi-hdd-stack"></i>
+      </a>
+      <a href="#testimonials" class="w-12 h-12 flex items-center justify-center rounded-full text-xl text-white" title="Testimonials">
+        <i class="bi bi-chat-quote"></i>
+      </a>
+      <a href="#contact" class="w-12 h-12 flex items-center justify-center rounded-full text-xl text-white" title="Contact">
+        <i class="bi bi-envelope"></i>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav md:hidden">
+    <nav class="flex justify-around items-center py-2">
+      <a href="#hero" class="flex flex-col items-center p-2 text-white">
+        <i class="bi bi-house text-lg"></i>
+        <span class="text-xs mt-1">Home</span>
+      </a>
+      <a href="#about" class="flex flex-col items-center p-2 text-white">
+        <i class="bi bi-person text-lg"></i>
+        <span class="text-xs mt-1">About</span>
+      </a>
+      <a href="#portfolio" class="flex flex-col items-center p-2 text-white">
+        <i class="bi bi-images text-lg"></i>
+        <span class="text-xs mt-1">Work</span>
+      </a>
+      <a href="#contact" class="flex flex-col items-center p-2 text-white">
+        <i class="bi bi-envelope text-lg"></i>
+        <span class="text-xs mt-1">Contact</span>
+      </a>
+    </nav>
+  </div>
+
+  <main class="ml-0 md:ml-24">
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center px-4 md:px-12 pt-16 pb-8 md:pt-0 md:pb-0">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <!-- Text Content -->
+          <div data-aos="fade-right">
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-tight">
+              Gasy <span class="gradient-text">Kamal</span>
+            </h1>
+            <p class="text-xl md:text-2xl mt-4 text-gray-300">
+              I'm a <span id="typed" class="font-semibold gradient-text"></span>
+            </p>
+            <p class="mt-6 text-gray-400 max-w-lg">
+              UI/UX designer with a sharp eye for detail, blending elegant interfaces with intuitive user journeys. Skilled in creating visually balanced designs, refining user flows, and crafting experiences that feel effortless and engaging.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a href="#portfolio" class="px-5 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 text-center">
+                View My Work
+              </a>
+              <a href="#contact" class="px-5 py-3 border-2 border-purple-500 text-white font-semibold rounded-lg shadow-lg hover:bg-purple-500 hover:text-white transform transition-all duration-300 text-center">
+                Get In Touch
+              </a>
+            </div>
+            <div class="mt-8 flex items-center gap-4">
+              <a href="https://www.behance.net/gasykamal" target="_blank" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full text-white hover:bg-purple-600 transition-colors">
+                <i class="bi bi-behance"></i>
+              </a>
+              <a href="https://www.facebook.com/ga.sy.904" target="_blank" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full text-white hover:bg-purple-600 transition-colors">
+                <i class="bi bi-facebook"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/gasy-kamal-904873359" target="_blank" class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full text-white hover:bg-purple-600 transition-colors">
+                <i class="bi bi-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Image Content -->
+          <div class="flex justify-center items-center order-first lg:order-last" data-aos="fade-left">
+            <div class="relative w-64 h-64 md:w-96 md:h-96 floating-image">
+              <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-2xl opacity-50"></div>
+              <img src="assets/images/Gasy.jpg" alt="Gasy Kamal's Photo" class="relative w-full h-full object-cover rounded-full border-4 border-gray-800 shadow-2xl">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 md:py-20 px-4 md:px-12">
+      <div class="container mx-auto section-title text-center mb-12" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold">About Me</h2>
+        <p class="text-gray-400 mt-2">Passionate About Creating Digital Experiences</p>
+      </div>
+      
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          <!-- Profile Card -->
+          <div class="p-6 md:p-8 rounded-2xl glass-effect" data-aos="zoom-in">
+            <div class="text-center mb-6">
+              <img src="assets/images/Gasy2.jpg" alt="Profile Image" class="w-40 h-40 md:w-48 md:h-48 rounded-full object-cover mx-auto shadow-lg mb-4">
+              <div class="absolute bg-purple-600 w-6 h-6 rounded-full flex items-center justify-center -mt-8 ml-32 md:-mt-12 md:ml-40">
+                <i class="bi bi-check text-white text-sm"></i>
+              </div>
+            </div>
+            <h3 class="text-2xl font-bold text-center mb-2">Gasy Kamal</h3>
+            <p class="text-center text-gray-400 mb-6">UI/UX Designer</p>
+            
+            <div class="space-y-3">
+              <div class="flex items-center gap-3">
+                <i class="bi bi-envelope text-purple-400"></i>
+                <a href="mailto:gasykamal8@gmail.com" class="text-gray-300 hover:text-purple-400 text-sm md:text-base">gasykamal8@gmail.com</a>
+              </div>
+              <div class="flex items-center gap-3">
+                <i class="bi bi-telephone text-purple-400"></i>
+                <span class="text-gray-300 text-sm md:text-base">+20 1278933872</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <i class="bi bi-geo-alt text-purple-400"></i>
+                <span class="text-gray-300 text-sm md:text-base">Egypt, Cairo</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- About Content -->
+          <div data-aos="fade-left">
+            <div class="mb-8">
+              <span class="inline-block px-4 py-2 bg-purple-600 bg-opacity-20 text-purple-400 rounded-full text-sm font-medium mb-4">Get to Know Me</span>
+              <h3 class="text-2xl md:text-3xl font-bold mb-6">Passionate About Creating Digital Experiences</h3>
+              <div class="space-y-4 text-gray-300">
+                <p> 
+                  Meet Gasy Kamal a passionate UI/UX designer who turns ideas into visual experiences that speak louder than words.
+                  With a sharp eye for detail and a heart that beats for creativity, she bridges the gap between beauty and usability — crafting interfaces that not only look stunning but feel effortless to use. 
+                </p>
+                <p>
+                  Gasy Kamal  believes great design isn’t just about pixels; it’s about people. She dives deep into user stories, emotions, and journeys to create digital experiences that connect, inspire, and leave a lasting impression.
+                </p>
+                <p>
+                  When she’s not sketching wireframes or perfecting a layout, you’ll find her exploring design trends, experimenting with colors, or dreaming up her next bold concept.
+                  In every project, she brings imagination, empathy, and an unshakable commitment to making the web a more human place.
+                </p>
+                
+              </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-8">
+              <div class="text-center">
+                <div class="text-2xl md:text-3xl font-bold text-purple-400 counter" data-target="2">0</div>
+                <div class="text-gray-400 text-sm">Projects Completed</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl md:text-3xl font-bold text-purple-400 counter" data-target="1">0</div>
+                <div class="text-gray-400 text-sm">Years Experience</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl md:text-3xl font-bold text-purple-400 counter" data-target="2">0</div>
+                <div class="text-gray-400 text-sm">Client Satisfaction</div>
+              </div>
+            </div>
+
+            <!-- Details Grid -->
+            <div class="space-y-4">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <span class="text-gray-400 text-sm">Specialization</span>
+                  <p class="text-white font-medium text-sm md:text-base">UI/UX Design & Enhance CX</p>
+                </div>
+                <div>
+                  <span class="text-gray-400 text-sm">Experience Level</span>
+                  <p class="text-white font-medium text-sm md:text-base">Associate Designer / Associate UI/UX</p>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <span class="text-gray-400 text-sm">Education</span>
+                  <p class="text-white font-medium text-sm md:text-base">Management Information System, El-Shorouk academy (2025)</p>
+                </div>
+                <div>
+                  <span class="text-gray-400 text-sm">Languages</span>
+                  <p class="text-white font-medium text-sm md:text-base">Arabic, English</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-wrap gap-4 mt-8">
+              <a href="#" class="px-5 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300 text-sm md:text-base">
+                <i class="bi bi-download mr-2"></i>Download Resume
+              </a>
+              <a href="#contact" class="px-5 py-3 border-2 border-purple-500 text-white font-semibold rounded-lg shadow-lg hover:bg-purple-500 hover:text-white transform transition-all duration-300 text-sm md:text-base">
+                <i class="bi bi-chat-dots mr-2"></i>Let's Talk
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="py-16 md:py-20 px-4 md:px-12 bg-black bg-opacity-20">
+        <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 md:gap-8 text-center">
+            <div class="p-6 glass-effect rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                <i class="bi bi-emoji-smile text-3xl md:text-4xl text-purple-400 mb-3"></i>
+                <h3 class="text-3xl md:text-4xl font-bold counter" data-target="2">0</h3>
+                <p class="text-gray-400 mt-1 text-sm md:text-base">Happy Clients</p>
+            </div>
+            <div class="p-6 glass-effect rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                <i class="bi bi-journal-richtext text-3xl md:text-4xl text-purple-400 mb-3"></i>
+                <h3 class="text-3xl md:text-4xl font-bold counter" data-target="2">0</h3>
+                <p class="text-gray-400 mt-1 text-sm md:text-base">Projects</p>
+            </div>
+            <!-- <div class="p-6 glass-effect rounded-xl" data-aos="fade-up" data-aos-delay="300">
+                <i class="bi bi-headset text-3xl md:text-4xl text-purple-400 mb-3"></i>
+                <h3 class="text-3xl md:text-4xl font-bold counter" data-target="1463">0</h3>
+                <p class="text-gray-400 mt-1 text-sm md:text-base">Hours Of Support</p>
+            </div> -->
+            <!-- <div class="p-6 glass-effect rounded-xl" data-aos="fade-up" data-aos-delay="400">
+                <i class="bi bi-people text-3xl md:text-4xl text-purple-400 mb-3"></i>
+                <h3 class="text-3xl md:text-4xl font-bold counter" data-target="15">0</h3>
+                <p class="text-gray-400 mt-1 text-sm md:text-base">Hard Workers</p>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="py-16 md:py-20 px-4 md:px-12">
+      <div class="container mx-auto section-title text-center mb-12" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold">Resume</h2>
+        <p class="text-gray-400 mt-2">My professional journey and educational background</p>
+      </div>
+
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
+          <!-- Left Side - Profile & Summary -->
+          <div class="lg:col-span-1" data-aos="fade-right">
+            <div class="p-6 glass-effect rounded-2xl">
+              <div class="text-center mb-6">
+                <img src="assets/images/Gasy3.jpg" alt="Profile" class="w-32 h-32 rounded-full mx-auto mb-4">
+              </div>
+              
+              <h3 class="text-xl font-bold mb-4 text-purple-400">Professional Summary</h3>
+              <p class="text-gray-300 mb-6 text-sm">
+                UI/UX Designer with expertise in creating user-friendly, visually refined interfaces and intuitive digital experiences. Skilled in applying advanced color theory, enhancing usability, and optimizing user journeys.
+              </p>
+
+              <h3 class="text-xl font-bold mb-4 text-purple-400">Contact Information</h3>
+              <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2">
+                  <i class="bi bi-geo-alt text-purple-400"></i>
+                  <span>Egypt, Cairo</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="bi bi-envelope text-purple-400"></i>
+                  <span>gasykamal8@gmail.com</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="bi bi-telephone text-purple-400"></i>
+                  <span>+20 1278933872</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="bi bi-linkedin text-purple-400"></i>
+                  <span>linkedin.com/in/gasy-kamal-904873359</span>
+                </div>
+              </div>
+
+              <!-- Technical Skills -->
+              <div class="mt-8">
+                <h3 class="text-xl font-bold mb-4 text-purple-400">Technical Skills</h3>
+                <div class="space-y-4">
+                  <div>
+                    <div class="flex justify-between mb-1">
+                      <span class="text-sm">Figma</span>
+                      <span class="text-sm text-purple-400">99%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                      <div class="skill-bar-inner bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full" data-width="99%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between mb-1">
+                      <span class="text-sm">User Experience (UX)</span>
+                      <span class="text-sm text-purple-400">85%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                      <div class="skill-bar-inner bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full" data-width="85%"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="flex justify-between mb-1">
+                      <span class="text-sm">User Interface Design</span>
+                      <span class="text-sm text-purple-400">80%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-2">
+                      <div class="skill-bar-inner bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full" data-width="80%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Side - Experience & Education -->
+          <div class="lg:col-span-2" data-aos="fade-left">
+            <div class="space-y-8">
+              <!-- Professional Experience -->
+              <div class="p-6 glass-effect rounded-2xl">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                  <i class="bi bi-award text-purple-400 mr-3"></i>
+                  Certifications
+                </h3>
+                
+                <div class="resume-item">
+                  <h4 class="text-lg font-bold text-white">UI/UX Design Professional Certificate (NTI)</h4>
+                  <span class="text-purple-400 font-medium">2025</span>
+                </div>
+
+                <div class="resume-item">
+                  <h4 class="text-lg font-bold text-white">UX Course (MaharaTech)</h4>
+                  <span class="text-purple-400 font-medium">2025</span>
+                </div>
+
+                <!-- <div class="resume-item">
+                  <h4 class="text-lg font-bold text-white">UI/UX Design Course (SHIFT UP)</h4>
+                  <span class="text-purple-400 font-medium">2025</span>
+                </div> -->
+              </div>
+              
+              <!-- Professional Experience -->
+              <div class="p-6 glass-effect rounded-2xl">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                  <i class="bi bi-briefcase text-purple-400 mr-3"></i>
+                  Professional Experience
+                </h3>
+                
+                <!-- <div class="resume-item">
+                  <h4 class="text-lg font-bold text-white">Senior UI/UX Designer</h4>
+                  <h5 class="text-purple-400 font-medium">2022 - Present</h5>
+                  <p class="text-gray-400 mb-2">
+                    <i class="bi bi-building mr-1"></i>
+                    Freelance & Contract Work
+                  </p>
+                  <ul class="text-gray-300 text-sm space-y-1">
+                    <li>• Lead design projects for 150+ clients across various industries</li>
+                    <li>• Specialize in creating user-centric interfaces with advanced color theory</li>
+                    <li>• Optimize user journeys and enhance customer experience</li>
+                    <li>• Maintain 98% client satisfaction rate through iterative design process</li>
+                  </ul>
+                </div> -->
+
+                <div class="resume-item">
+                  <h4 class="text-lg font-bold text-white">UI/UX Designer </h4>
+                  <h5 class="text-purple-400 font-medium">2024 - Present</h5>
+                  <p class="text-gray-400 mb-2">
+                    <i class="bi bi-building mr-1"></i>
+                    Freelance & Contract Work
+                  </p>
+                  <ul class="text-gray-300 text-sm space-y-1">
+                    <li>• Designed user interfaces for web and mobile applications</li>
+                    <li>• Collaborated with development teams to implement designs</li>
+                    <li>• Conducted user research and usability testing</li>
+                    <li>• Created design systems and style guides</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Education -->
+              <div class="p-6 glass-effect rounded-2xl">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                  <i class="bi bi-mortarboard text-purple-400 mr-3"></i>
+                  Education
+                </h3>
+                
+                <div class="resume-item">
+                  <h4 class="text-lg font-bold text-white">Bachelor of Management Information System</h4>
+                  <h5 class="text-purple-400 font-medium">2021 - 2025</h5>
+                  <p class="text-gray-400 mb-2">
+                    <i class="bi bi-building mr-1"></i>
+                    El-Shorouk Academy
+                  </p>
+                  <p class="text-gray-300 text-sm">
+                    Focused on information systems, user experience design, and business analysis. Graduated with honors.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 md:py-20 px-4 md:px-12 bg-black bg-opacity-20">
+        <div class="container mx-auto section-title text-center mb-12" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold">Skills</h2>
+            <p class="text-gray-400 mt-2">A diverse set of technical and interpersonal skills for innovative solutions</p>
+        </div>
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <div data-aos="fade-right">
+                <h3 class="text-2xl font-semibold mb-6 text-center">Technical Skills</h3>
+                <div class="space-y-6 skills-container">
+                    <div class="skill-item">
+                        <div class="flex justify-between mb-1"><span class="font-medium">Figma</span><span class="font-medium text-purple-400">99%</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="skill-bar-inner bg-gradient-to-r from-blue-500 to-purple-600 h-2.5 rounded-full" data-width="99%"></div></div>
+                        <p class="text-sm text-gray-400 mt-1">Advanced expertise in creating interactive prototypes and user interfaces</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between mb-1"><span class="font-medium">User Experience (UX)</span><span class="font-medium text-purple-400">85%</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="skill-bar-inner bg-gradient-to-r from-blue-500 to-purple-600 h-2.5 rounded-full" data-width="85%"></div></div>
+                        <p class="text-sm text-gray-400 mt-1">Proficient in user research, wireframing, and designing intuitive experiences</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between mb-1"><span class="font-medium">User Interface Design</span><span class="font-medium text-purple-400">80%</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="skill-bar-inner bg-gradient-to-r from-blue-500 to-purple-600 h-2.5 rounded-full" data-width="80%"></div></div>
+                        <p class="text-sm text-gray-400 mt-1">Skilled in crafting visually appealing and functional interfaces</p>
+                    </div>
+                </div>
+            </div>
+            <div data-aos="fade-left">
+                <h3 class="text-2xl font-semibold mb-6 text-center">Soft Skills</h3>
+                <div class="space-y-6 skills-container">
+                    <div class="skill-item">
+                        <div class="flex justify-between mb-1"><span class="font-medium">Public Speaking</span><span class="font-medium text-purple-400">75%</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="skill-bar-inner bg-gradient-to-r from-blue-500 to-purple-600 h-2.5 rounded-full" data-width="75%"></div></div>
+                        <p class="text-sm text-gray-400 mt-1">Confident in delivering clear presentations to diverse audiences</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between mb-1"><span class="font-medium">Teamwork</span><span class="font-medium text-purple-400">70%</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="skill-bar-inner bg-gradient-to-r from-blue-500 to-purple-600 h-2.5 rounded-full" data-width="70%"></div></div>
+                        <p class="text-sm text-gray-400 mt-1">Effective collaborator focused on positive team dynamics</p>
+                    </div>
+                    <div class="skill-item">
+                        <div class="flex justify-between mb-1"><span class="font-medium">Team-building Activities</span><span class="font-medium text-purple-400">65%</span></div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5"><div class="skill-bar-inner bg-gradient-to-r from-blue-500 to-purple-600 h-2.5 rounded-full" data-width="65%"></div></div>
+                        <p class="text-sm text-gray-400 mt-1">Skilled in organizing activities that enhance team cohesion</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-16 md:py-20 px-4 md:px-12">
+      <div class="container mx-auto section-title text-center mb-12" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold">Portfolio</h2>
+        <p class="text-gray-400 mt-2">A glimpse into some of the projects I've enjoyed working on</p>
+      </div>
+      
+      <div class="max-w-6xl mx-auto">
+        <!-- Filter Buttons -->
+        <div class="flex justify-center mb-12" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex flex-wrap gap-2 p-2 glass-effect rounded-lg">
+            <button class="portfolio-filter active px-3 py-2 rounded-lg font-medium transition-all text-sm md:text-base" data-filter="*">All Projects</button>
+            <button class="portfolio-filter px-3 py-2 rounded-lg font-medium transition-all text-sm md:text-base" data-filter="ui">UI</button>
+            <button class="portfolio-filter px-3 py-2 rounded-lg font-medium transition-all text-sm md:text-base" data-filter="ux">UX</button>
+            <button class="portfolio-filter px-3 py-2 rounded-lg font-medium transition-all text-sm md:text-base" data-filter="mobile">Mobile</button>
+            <button class="portfolio-filter px-3 py-2 rounded-lg font-medium transition-all text-sm md:text-base" data-filter="web">Web</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 portfolio-container">
+          <div class="portfolio-item ui mobile group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
+            <img src="assets/images/image.png" alt="M's Bagel App" class="w-full h-64 object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-500 flex flex-col justify-end p-6">
+              <span class="text-purple-400 text-sm font-medium transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">UI Design</span>
+              <h3 class="text-xl font-bold text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">TravelBoo App</h3>
+              <p class="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mt-2">The design of TravelBoo App focuses on delivering a clean, intuitive, and user-centered travel experience.</p>
+              <div class="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <!-- <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-plus-lg"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-arrow-right"></i>
+                </a> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item ux web group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
+            <img src="https://placehold.co/600x400/4169E1/FFFFFF?text=Woodcraft+Design" alt="Woodcraft Design" class="w-full h-64 object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-500 flex flex-col justify-end p-6">
+              <span class="text-purple-400 text-sm font-medium transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">Web Design</span>
+              <h3 class="text-xl font-bold text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">Woodcraft Design</h3>
+              <p class="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mt-2">Web design for a furniture company with elegant and modern aesthetics.</p>
+              <div class="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <!-- <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-plus-lg"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-arrow-right"></i>
+                </a> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item ui ux group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
+            <img src="https://placehold.co/600x400/8A2BE2/FFFFFF?text=Finance+Dashboard" alt="Finance Dashboard" class="w-full h-64 object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-500 flex flex-col justify-end p-6">
+              <span class="text-purple-400 text-sm font-medium transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">UX/UI</span>
+              <h3 class="text-xl font-bold text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">Finance Dashboard</h3>
+              <p class="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mt-2">Complex data visualization tool with intuitive user interface design.</p>
+              <div class="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <!-- <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-plus-lg"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-arrow-right"></i>
+                </a> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item mobile ui group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="400">
+            <img src="https://placehold.co/600x400/4169E1/FFFFFF?text=E-Commerce+App" alt="E-Commerce App" class="w-full h-64 object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-500 flex flex-col justify-end p-6">
+              <span class="text-purple-400 text-sm font-medium transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">Mobile App</span>
+              <h3 class="text-xl font-bold text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">E-Commerce App</h3>
+              <p class="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mt-2">Mobile shopping experience with seamless user journey and conversion optimization.</p>
+              <div class="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <!-- <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-plus-lg"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-arrow-right"></i>
+                </a> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item web ux group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="500">
+            <img src="https://placehold.co/600x400/8A2BE2/FFFFFF?text=Healthcare+Platform" alt="Healthcare Platform" class="w-full h-64 object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-500 flex flex-col justify-end p-6">
+              <span class="text-purple-400 text-sm font-medium transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">Web Platform</span>
+              <h3 class="text-xl font-bold text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">Healthcare Platform</h3>
+              <p class="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mt-2">Patient management system with focus on accessibility and user-friendly interface.</p>
+              <div class="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <!-- <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-plus-lg"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-arrow-right"></i>
+                </a> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-item ui mobile group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="600">
+            <img src="https://placehold.co/600x400/4169E1/FFFFFF?text=Travel+App" alt="Travel App" class="w-full h-64 object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-500 flex flex-col justify-end p-6">
+              <span class="text-purple-400 text-sm font-medium transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">Mobile UI</span>
+              <h3 class="text-xl font-bold text-white transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">Travel App</h3>
+              <p class="text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mt-2">Travel booking application with immersive visual design and intuitive navigation.</p>
+              <div class="flex gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <!-- <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-plus-lg"></i>
+                </a>
+                <a href="#" class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center text-white hover:bg-purple-700">
+                  <i class="bi bi-arrow-right"></i>
+                </a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 md:py-20 px-4 md:px-12 bg-black bg-opacity-20">
+        <div class="container mx-auto section-title text-center mb-12" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold">Services</h2>
+            <p class="text-gray-400 mt-2">Innovative UIUX Designs</p>
+        </div>
+        
+        <div class="max-w-6xl mx-auto">
+          <!-- Service Header -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16" data-aos="fade-up">
+            <div class="lg:col-span-2">
+              <h2 class="text-3xl md:text-5xl font-bold mb-6">
+                <div class="text-white">Innovative UIUX</div>
+                <div class="gradient-text">Designs</div>
+              </h2>
+            </div>
+            <div class="lg:col-span-1">
+              <p class="text-gray-300 mb-6">
+                We combine human-centered design strategies, intuitive interaction patterns, and cutting-edge design tools to craft seamless digital experiences that delight users, foster engagement, and drive product growth.
+              </p>
+              <a href="#contact" class="inline-flex items-center px-5 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300">
+                View All Services
+                <i class="bi bi-arrow-right ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+<!-- adly -->
+<!-- Services Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+
+  <!-- User Research -->
+  <div class="p-6 md:p-8 glass-effect rounded-2xl transform hover:-translate-y-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="100">
+    <div class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+      <i class="bi bi-people text-2xl text-white"></i>
+    </div>
+    <h3 class="text-xl font-bold mb-4">
+      User <span class="text-purple-400">Research</span>
+    </h3>
+    <p class="text-gray-300 text-sm md:text-base">
+      Conducting user interviews, surveys, and usability studies to understand user needs, pain points, and behaviors that shape meaningful design decisions.
+    </p>
+    <a href="#" class="inline-flex items-center justify-center w-10 h-10 bg-purple-600 rounded-full text-white mt-6 hover:bg-purple-700">
+      <i class="bi bi-arrow-up-right"></i>
+    </a>
+  </div>
+
+  <!-- Wireframing & Prototyping -->
+  <div class="p-6 md:p-8 glass-effect rounded-2xl transform hover:-translate-y-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
+    <div class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+      <i class="bi bi-vector-pen text-2xl text-white"></i>
+    </div>
+    <h3 class="text-xl font-bold mb-4">
+      Wireframing & <span class="text-purple-400">Prototyping</span>
+    </h3>
+    <p class="text-gray-300 text-sm md:text-base">
+      Designing low-fidelity wireframes and interactive prototypes to visualize user flows and validate concepts before full-scale design and development.
+    </p>
+    <a href="#" class="inline-flex items-center justify-center w-10 h-10 bg-purple-600 rounded-full text-white mt-6 hover:bg-purple-700">
+      <i class="bi bi-arrow-up-right"></i>
+    </a>
+  </div>
+
+  <!-- Interaction Design -->
+  <div class="p-6 md:p-8 glass-effect rounded-2xl transform hover:-translate-y-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="300">
+    <div class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+      <i class="bi bi-mouse text-2xl text-white"></i>
+    </div>
+    <h3 class="text-xl font-bold mb-4">
+      Interaction <span class="text-purple-400">Design</span>
+    </h3>
+    <p class="text-gray-300 text-sm md:text-base">
+      Creating engaging, intuitive interactions and micro-animations that guide users seamlessly through digital products and enhance usability.
+    </p>
+    <a href="#" class="inline-flex items-center justify-center w-10 h-10 bg-purple-600 rounded-full text-white mt-6 hover:bg-purple-700">
+      <i class="bi bi-arrow-up-right"></i>
+    </a>
+  </div>
+
+  <!-- Usability Testing -->
+  <div class="p-6 md:p-8 glass-effect rounded-2xl transform hover:-translate-y-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="400">
+    <div class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+      <i class="bi bi-check2-circle text-2xl text-white"></i>
+    </div>
+    <h3 class="text-xl font-bold mb-4">
+      Usability <span class="text-purple-400">Testing</span>
+    </h3>
+    <p class="text-gray-300 text-sm md:text-base">
+      Testing prototypes and live products with real users to identify usability issues and improve the overall user experience.
+    </p>
+    <a href="#" class="inline-flex items-center justify-center w-10 h-10 bg-purple-600 rounded-full text-white mt-6 hover:bg-purple-700">
+      <i class="bi bi-arrow-up-right"></i>
+    </a>
+  </div>
+
+  <!-- Design Systems -->
+  <div class="p-6 md:p-8 glass-effect rounded-2xl transform hover:-translate-y-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="500">
+    <div class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+      <i class="bi bi-layers text-2xl text-white"></i>
+    </div>
+    <h3 class="text-xl font-bold mb-4">
+      Design <span class="text-purple-400">Systems</span>
+    </h3>
+    <p class="text-gray-300 text-sm md:text-base">
+      Building scalable design systems with reusable components and guidelines that ensure consistency across products and platforms.
+    </p>
+    <a href="#" class="inline-flex items-center justify-center w-10 h-10 bg-purple-600 rounded-full text-white mt-6 hover:bg-purple-700">
+      <i class="bi bi-arrow-up-right"></i>
+    </a>
+  </div>
+
+  <!-- Visual Design -->
+  <div class="p-6 md:p-8 glass-effect rounded-2xl transform hover:-translate-y-2 transition-transform duration-300" data-aos="fade-up" data-aos-delay="600">
+    <div class="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+      <i class="bi bi-palette text-2xl text-white"></i>
+    </div>
+    <h3 class="text-xl font-bold mb-4">
+      Visual <span class="text-purple-400">Design</span>
+    </h3>
+    <p class="text-gray-300 text-sm md:text-base">
+      Crafting visually compelling user interfaces with thoughtful use of color, typography, and layout to enhance brand identity and user experience.
+    </p>
+    <a href="#" class="inline-flex items-center justify-center w-10 h-10 bg-purple-600 rounded-full text-white mt-6 hover:bg-purple-700">
+      <i class="bi bi-arrow-up-right"></i>
+    </a>
+  </div>
+
+</div>
+
+<!-- adly -->
+          
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 md:py-20 px-4 md:px-12">
+      <div class="container mx-auto section-title text-center mb-12" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold">Testimonials</h2>
+        <p class="text-gray-400 mt-2">What clients say about working with me</p>
+      </div>
+
+      <div class="max-w-6xl mx-auto">
+        <div class="testimonial-grid">
+          <div class="testimonial-card p-6 glass-effect rounded-2xl" data-aos="fade-up">
+            <div class="mb-4">
+              <i class="bi bi-quote text-3xl text-purple-400"></i>
+            </div>
+            <p class="text-gray-300 mb-6">Implementing innovative strategies has revolutionized our approach to market challenges and competitive positioning.</p>
+            <div class="flex items-center gap-4">
+              <img src="https://placehold.co/60x60/8A2BE2/FFFFFF?text=RB" alt="Rachel Bennett" class="w-12 h-12 rounded-full">
+              <div>
+                <h4 class="font-bold text-white">Rachel Bennett</h4>
+                <p class="text-gray-400 text-sm">Strategy Director</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card p-6 glass-effect rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+            <div class="mb-4">
+              <i class="bi bi-quote text-3xl text-purple-400"></i>
+            </div>
+            <p class="text-gray-300 mb-6">Exceptional service delivery and innovative solutions have transformed our business operations, leading to remarkable growth and enhanced customer satisfaction across all touchpoints.</p>
+            <div class="flex items-center gap-4">
+              <img src="https://placehold.co/60x60/4169E1/FFFFFF?text=DM" alt="Daniel Morgan" class="w-12 h-12 rounded-full">
+              <div>
+                <h4 class="font-bold text-white">Daniel Morgan</h4>
+                <p class="text-gray-400 text-sm">Chief Innovation Officer</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card p-6 glass-effect rounded-2xl" data-aos="fade-up" data-aos-delay="200">
+            <div class="mb-4">
+              <i class="bi bi-quote text-3xl text-purple-400"></i>
+            </div>
+            <p class="text-gray-300 mb-6">Strategic partnership has enabled seamless digital transformation and operational excellence.</p>
+            <div class="flex items-center gap-4">
+              <img src="https://placehold.co/60x60/8A2BE2/FFFFFF?text=ET" alt="Emma Thompson" class="w-12 h-12 rounded-full">
+              <div>
+                <h4 class="font-bold text-white">Emma Thompson</h4>
+                <p class="text-gray-400 text-sm">Digital Lead</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card p-6 glass-effect rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+            <div class="mb-4">
+              <i class="bi bi-quote text-3xl text-purple-400"></i>
+            </div>
+            <p class="text-gray-300 mb-6">Professional expertise and dedication have significantly improved our project delivery timelines and quality metrics.</p>
+            <div class="flex items-center gap-4">
+              <img src="https://placehold.co/60x60/4169E1/FFFFFF?text=CL" alt="Christopher Lee" class="w-12 h-12 rounded-full">
+              <div>
+                <h4 class="font-bold text-white">Christopher Lee</h4>
+                <p class="text-gray-400 text-sm">Project Manager</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-20 px-4 md:px-12 bg-black bg-opacity-20">
+      <div class="container mx-auto section-title text-center mb-12" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold">Contact Me</h2>
+        <p class="text-gray-400 mt-2">Let's discuss your next project</p>
+      </div>
+
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+          <!-- Contact Information -->
+          <div data-aos="fade-right">
+            <h3 class="text-2xl font-bold mb-6">Get In Touch</h3>
+            <p class="text-gray-300 mb-8">
+              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out to me.
+            </p>
+            
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-purple-600 bg-opacity-20 rounded-full flex items-center justify-center">
+                  <i class="bi bi-geo-alt text-purple-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white">Location</h4>
+                  <p class="text-gray-300">Egypt, Cairo</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-purple-600 bg-opacity-20 rounded-full flex items-center justify-center">
+                  <i class="bi bi-envelope text-purple-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white">Email</h4>
+                  <a href="mailto:gasykamal8@gmail.com" class="text-gray-300 hover:text-purple-400">gasykamal8@gmail.com</a>
+                </div>
+              </div>
+              
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-purple-600 bg-opacity-20 rounded-full flex items-center justify-center">
+                  <i class="bi bi-telephone text-purple-400"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-white">Phone</h4>
+                  <a href="tel:+201278933872" class="text-gray-300 hover:text-purple-400">+20 1278933872</a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-8 flex gap-4">
+              <a href="https://www.linkedin.com/in/gasy-kamal-904873359" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white hover:bg-purple-600 transition-colors">
+                <i class="bi bi-linkedin"></i>
+              </a>
+              <a href="https://www.behance.net/gasykamal" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white hover:bg-purple-600 transition-colors">
+                <i class="bi bi-behance"></i>
+              </a>
+              <a href="https://www.facebook.com/ga.sy.904" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white hover:bg-purple-600 transition-colors">
+                <i class="bi bi-facebook"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Contact Form -->
+          <div data-aos="fade-left">
+            <form class="space-y-6" id="contact-form">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+                  <input type="text" id="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                </div>
+                <div>
+                  <label for="email" class="block text-gray-300 mb-2">Your Email</label>
+                  <input type="email" id="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                </div>
+              </div>
+              <div>
+                <label for="subject" class="block text-gray-300 mb-2">Subject</label>
+                <input type="text" id="subject" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+              </div>
+              <div>
+                <label for="message" class="block text-gray-300 mb-2">Message</label>
+                <textarea id="message" rows="5" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600" required></textarea>
+              </div>
+              <button type="submit" class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-8 px-4 md:px-12 border-t border-gray-800">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="text-center md:text-left mb-4 md:mb-0">
+          <p class="text-gray-400">© 2025 Gasy Kamal. All rights reserved.</p>
+        </div>
+        <div class="flex gap-4">
+          <a href="https://www.linkedin.com/in/gasy-kamal-904873359" target="_blank" class="text-gray-400 hover:text-purple-400 transition-colors">
+            <i class="bi bi-linkedin"></i>
+          </a>
+          <a href="https://www.behance.net/gasykamal" target="_blank" class="text-gray-400 hover:text-purple-400 transition-colors">
+            <i class="bi bi-behance"></i>
+          </a>
+          <a href="https://www.facebook.com/ga.sy.904" target="_blank" class="text-gray-400 hover:text-purple-400 transition-colors">
+            <i class="bi bi-facebook"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS
+    document.addEventListener('DOMContentLoaded', function() {
+      // Preloader
+      setTimeout(() => {
+        document.querySelector('.preloader').style.opacity = '0';
+        setTimeout(() => {
+          document.querySelector('.preloader').style.display = 'none';
+        }, 500);
+      }, 1500);
+
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+      });
+
+      // Typed.js initialization
+      const typed = new Typed('#typed', {
+        strings: ['UI/UX Designer', 'Creative Thinker', 'Problem Solver'],
+        typeSpeed: 70,
+        backSpeed: 50,
+        loop: true,
+        backDelay: 1500
+      });
+
+      // Navigation active state
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-dock a, .mobile-nav a');
+      
+      function updateActiveNav() {
+        let scrollY = window.pageYOffset;
+        
+        sections.forEach(section => {
+          const sectionHeight = section.offsetHeight;
+          const sectionTop = section.offsetTop - 100;
+          const sectionId = section.getAttribute('id');
+          
+          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+        
+        // Show/hide scroll to top button
+        const scrollBtn = document.querySelector('.floating-action-btn');
+        if (scrollY > 500) {
+          scrollBtn.classList.add('visible');
+        } else {
+          scrollBtn.classList.remove('visible');
+        }
+        
+        // Update progress bar
+        const winHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const totalScroll = (scrollY / (docHeight - winHeight)) * 100;
+        document.querySelector('.progress-bar').style.width = `${totalScroll}%`;
+      }
+      
+      window.addEventListener('scroll', updateActiveNav);
+      
+      // Counter animation
+  const counters = document.querySelectorAll('.counter');
+  const speed = 300; 
+
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+
+    const updateCounter = () => {
+      let current = +counter.innerText; // الرقم الحالي
+      const increment = Math.ceil(target / speed);
+
+      if (current < target) {
+        counter.innerText = current + increment;
+        setTimeout(updateCounter, 20); // التحكم في سرعة التحديث
+      } else {
+        counter.innerText = target; // عشان مايزودش عن الهدف
+      }
+    };
+
+    updateCounter();
+  });
+
+  
+
+      
+      // Skill bar animation
+      const skillBars = document.querySelectorAll('.skill-bar-inner');
+      
+      const animateSkillBars = () => {
+        skillBars.forEach(bar => {
+          const width = bar.getAttribute('data-width');
+          bar.style.width = width;
+        });
+      };
+      
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.4
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (entry.target.classList.contains('skills-container')) {
+              animateSkillBars();
+            }
+            if (entry.target.classList.contains('counter-section')) {
+              animateCounters();
+            }
+            if (entry.target.classList.contains('section-title')) {
+              entry.target.classList.add('in-view');
+            }
+          }
+        });
+      }, observerOptions);
+      
+      // Observe elements
+      document.querySelectorAll('.skills-container, .counter-section, .section-title').forEach(el => {
+        observer.observe(el);
+      });
+      
+      // Portfolio filtering
+      const filterButtons = document.querySelectorAll('.portfolio-filter');
+      const portfolioItems = document.querySelectorAll('.portfolio-item');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          // Add active class to clicked button
+          button.classList.add('active');
+          
+          const filterValue = button.getAttribute('data-filter');
+          
+          portfolioItems.forEach(item => {
+            if (filterValue === '*' || item.classList.contains(filterValue)) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+      
+      // Custom cursor
+      const cursorDot = document.querySelector('.cursor-dot');
+      const cursorOutline = document.querySelector('.cursor-outline');
+      
+      document.addEventListener('mousemove', (e) => {
+        cursorDot.style.left = `${e.clientX}px`;
+        cursorDot.style.top = `${e.clientY}px`;
+        
+        cursorOutline.style.left = `${e.clientX}px`;
+        cursorOutline.style.top = `${e.clientY}px`;
+      });
+      
+      // Show cursor on desktop
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        cursorDot.classList.remove('hidden');
+        cursorOutline.classList.remove('hidden');
+        
+        document.querySelectorAll('a, button, .portfolio-item').forEach(item => {
+          item.addEventListener('mouseenter', () => {
+            cursorOutline.classList.add('hover');
+          });
+          
+          item.addEventListener('mouseleave', () => {
+            cursorOutline.classList.remove('hover');
+          });
+        });
+      }
+      
+      // Form submission
+      const contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          // Simple form validation
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const subject = document.getElementById('subject').value;
+          const message = document.getElementById('message').value;
+          
+          if (name && email && subject && message) {
+            // Here you would typically send the form data to a server
+            alert('Thank you for your message! I will get back to you soon.');
+            contactForm.reset();
+          } else {
+            alert('Please fill in all fields.');
+          }
+        });
+      }
+      
+      // Create particles
+      function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+        
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          particle.classList.add('particle');
+          
+          const size = Math.random() * 20 + 5;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+          
+          particle.style.left = `${Math.random() * 100}%`;
+          particle.style.top = `${Math.random() * 100}%`;
+          
+          particle.style.animation = `moveBlob1 ${Math.random() * 20 + 10}s infinite alternate`;
+          
+          particlesContainer.appendChild(particle);
+        }
+      }
+      
+      createParticles();
+
+      // Dark mode toggle
+      const darkModeToggle = document.querySelector('.dark-mode-toggle');
+      darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        const icon = darkModeToggle.querySelector('i');
+        if (document.body.classList.contains('light-mode')) {
+          icon.classList.remove('bi-moon');
+          icon.classList.add('bi-sun');
+          document.body.style.backgroundColor = '#f5f5f7';
+          document.body.style.color = '#333';
+        } else {
+          icon.classList.remove('bi-sun');
+          icon.classList.add('bi-moon');
+          document.body.style.backgroundColor = '#0d0d0d';
+          document.body.style.color = '#E0E0E0';
+        }
+      });
+        
+    });
+  </script>
+</body>
+</html>
